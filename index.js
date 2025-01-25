@@ -8,9 +8,7 @@ import 'dotenv/config'
 import cors from 'cors'
 const app = express();
 app.use(express.json()); //poori app pe laga he
-app.use(cors({
-    origin: 'http://localhost:3000'
-}))
+app.use(cors({"*"}))
 //connect to database
 
 mongoose.connect(process.env.MONGODB_URI).then(() => console.log("DB connected"))
