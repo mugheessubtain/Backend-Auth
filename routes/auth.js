@@ -50,12 +50,18 @@ router.post('/login', async (req, res) => {
 
     delete user.password
 
-    var token = jwt.sign({ ...user }, process.env.AUTH_SECRET,);
+    const token = jwt.sign({ ...user }, process.env.AUTH_SECRET);
+
+    const isAdmin = user.isAdmin || false;
 
     sendResponse(res, 200, {
         user,
-        token
+        token,
+        isAdmin
     }, false, 'User Login Successfully')
 })
-
+router.post('/logout', (req, res) => {
+    // Invalidate the token or clear the session here
+    sendResponse(res, 200, null, false, 'User Logged Out Successfully')
+})
 export default router
